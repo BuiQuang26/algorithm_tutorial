@@ -12,6 +12,9 @@ int dy[4] = {0, -1, 1, 0};
 void dfs(int i, int j)
 {
     visited[i][j] = true;
+
+    cout << i << " " << j << endl;
+
     // duyet cac dinh ke
     for (int k = 0; k < 4; k++)
     {
@@ -43,8 +46,9 @@ void init()
         {
             if (!visited[i][j])
             {
-                dfs(i, j);
                 ++cnt;
+                cout << "mien lien thong " << cnt << endl;
+                dfs(i, j);
             }
         }
 
