@@ -81,8 +81,23 @@ void mergeSort(Student students[], int left, int right)
     merge(students, left, mid, right);
 }
 
+// find student
+int findStudent(Student students[], int l, int r, string studentName)
+{
+    if (l > r)
+        return -1;
+    int m = (l + r) / 2;
+    if (students[m].firtName == studentName)
+        return m;
+    if (findStudent(students, l, m - 1, studentName) != -1)
+        return findStudent(students, l, m - 1, studentName);
+    else
+        return findStudent(students, m + 1, r, studentName);
+}
+
 int main()
 {
+    cout << findStudent(studentList, 0, n - 1, "B");
     showStudent(studentList, n);
     mergeSort(studentList, 0, n - 1);
     showStudent(studentList, n);
