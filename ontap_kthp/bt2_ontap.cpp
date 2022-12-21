@@ -94,7 +94,7 @@ void quyHoachDong(LopHoc lophocs[], int n, int p)
 }
 
 // xu ly xau
-int chat_in_string(string s, char c)
+int char_in_string(string s, char c)
 {
     for (int i = 0; i < s.length(); i++)
     {
@@ -107,33 +107,62 @@ int chat_in_string(string s, char c)
 // check s co phai la chuoi con cua p khong?
 bool string_in_string(string t, string p)
 {
+    int i = t.length();
+    int v = t.length();
+    
+    while( i <= p.length()){
+        int x = v - 1, j = i - 1;
+        while (x >= 0 && t[x] == p[j])
+        {
+            --x;
+            --j;
+        }
+        if(x < 0) return true;
+        else {
+            x = char_in_string(t, p[j]);
+            if(x < 0) 
+                i = i + v;
+            else
+                i = i + v - x - 1;
+        }
+    }
+    return false;
+}
+
+void showLopIt(LopHoc lophocs[], int n){
+    for(int i = 0; i < n; i++){
+        if(string_in_string("it12", lophocs[i].maLop)){
+            cout << lophocs[i].maLop << ": " << lophocs[i].studentTotal << ", " << lophocs[i].girlStudent << endl;
+        }
+    }
 }
 
 int main()
 {
     int n = 10;
     LopHoc lopHocs[10] = {
-        {"it1", 7, 3},
-        {"it2", 6, 5},
-        {"it3", 6, 3},
+        {"29181_dit12231", 7, 3},
+        {"2019_it2", 6, 5},
+        {"42i2it12231", 6, 3},
         {"it4", 8, 3},
         {"it5", 4, 2},
         {"it6", 6, 6},
         {"it7", 6, 5},
         {"it8", 5, 4},
-        {"it9", 7, 5},
-        {"it10", 8, 6},
+        {"khmt9", 7, 5},
+        {"ktmt10", 8, 6},
     };
     sort(lopHocs, n);
     showLopHoc(lopHocs, n);
-
-    int k, p;
-    cout << "nhap k = ";
-    cin >> k;
-    cout << getLopHoc(lopHocs, n, k) << endl;
-    cout << "nhap p = ";
-    cin >> p;
-    quyHoachDong(lopHocs, n, p);
-
+ 
+    // int k, p;
+    // cout << "nhap k = ";
+    // cin >> k;
+    // cout << getLopHoc(lopHocs, n, k) << endl;
+    // cout << "nhap p = ";
+    // cin >> p;
+    // quyHoachDong(lopHocs, n, p);
+    cout << " ------- tim lop it -----------" << endl;
+    showLopIt(lopHocs, n);
     return 0;
 }
