@@ -109,18 +109,21 @@ bool string_in_string(string t, string p)
 {
     int i = t.length();
     int v = t.length();
-    
-    while( i <= p.length()){
+
+    while (i <= p.length())
+    {
         int x = v - 1, j = i - 1;
         while (x >= 0 && t[x] == p[j])
         {
             --x;
             --j;
         }
-        if(x < 0) return true;
-        else {
+        if (x < 0)
+            return true;
+        else
+        {
             x = char_in_string(t, p[j]);
-            if(x < 0) 
+            if (x < 0)
                 i = i + v;
             else
                 i = i + v - x - 1;
@@ -129,9 +132,12 @@ bool string_in_string(string t, string p)
     return false;
 }
 
-void showLopIt(LopHoc lophocs[], int n){
-    for(int i = 0; i < n; i++){
-        if(string_in_string("it12", lophocs[i].maLop)){
+void findLopIt(LopHoc lophocs[], int n)
+{
+    for (int i = 0; i < n; i++)
+    {
+        if (string_in_string("it12", lophocs[i].maLop))
+        {
             cout << lophocs[i].maLop << ": " << lophocs[i].studentTotal << ", " << lophocs[i].girlStudent << endl;
         }
     }
@@ -154,7 +160,7 @@ int main()
     };
     sort(lopHocs, n);
     showLopHoc(lopHocs, n);
- 
+
     // int k, p;
     // cout << "nhap k = ";
     // cin >> k;
@@ -163,6 +169,6 @@ int main()
     // cin >> p;
     // quyHoachDong(lopHocs, n, p);
     cout << " ------- tim lop it -----------" << endl;
-    showLopIt(lopHocs, n);
+    findLopIt(lopHocs, n);
     return 0;
 }
