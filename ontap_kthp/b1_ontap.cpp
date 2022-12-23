@@ -28,6 +28,25 @@ int min_k(int a[], int l, int r, int k)
         return vtr;
 }
 
+int min_de_qui(int a[], int vt, int k)
+{
+    if (vt < 0)
+    {
+        return -1;
+    }
+
+    if (a[vt] <= k)
+        return min_de_qui(a, vt - 1, k);
+    else
+    {
+        int i = min_de_qui(a, vt - 1, k);
+        if (i < 0 || a[i] > a[vt])
+            return vt;
+        else
+            return i;
+    }
+}
+
 int main()
 {
     int n = 15;
@@ -48,7 +67,9 @@ int main()
     }
     cout << endl;
 
-    cout << a[min_k(a, 0, n - 1, k)];
+    int i = min_de_qui(a, n - 1, k);
+    if (i > -1)
+        cout << a[i];
 
     return 0;
 }
