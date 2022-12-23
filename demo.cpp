@@ -1,55 +1,37 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void show_config(int a[], int n)
+int findMaxInArray(double a[], int l, int r)
 {
-	for (int i = 1; i <= n; i++)
-	{
-		cout << a[i];
-	}
-	cout << endl;
-}
 
-void init(int a[], int n)
-{
-	for (int i = 1; i <= n; i++)
+	if (l >= r)
 	{
-		a[i] = i;
+		return r;
 	}
-}
-
-// 1234 1243 1324 1342 1423 1432 2134
-void next_config(int a[], int n, bool *flag)
-{
-	int i = n - 1;
-	while (i > 0 && a[i] > a[i + 1])
-	{
-		--i;
-	}
-	if (i == 0)
-		*flag = true;
-	else
-	{
-		int j = n;
-		while (a[j] < a[i])
-			--j;
-		swap(a[i], a[j]);
-		reverse(a + i + 1, a + n + 1);
-	}
+	int m = (l + r) / 2;
+	int vt_max_l = findMaxInArray(a, l, m);
+	int vt_max_r = findMaxInArray(a, m + 1, r);
+	if (a[vt_max_l] > a[vt_max_r])
+		return vt_max_l;
+	return vt_max_r;
 }
 
 int main()
 {
-	int n = 4;
-	int a[100];
-	bool flag = false;
-	init(a, n);
-
-	while (!flag)
+	int n = 15;
+	double a[n];
+	srand(time(NULL));
+	for (int i = 0; i < n; i++)
 	{
-		show_config(a, n);
-		next_config(a, n, &flag);
+		a[i] = rand() % 100 + 1;
 	}
 
+	for (int i = 0; i < n; i++)
+	{
+		cout << a[i] << " ";
+	}
+
+	cout << endl;
+	cout << a[findMaxInArray(a, 0, n - 1)];
 	return 0;
 }
